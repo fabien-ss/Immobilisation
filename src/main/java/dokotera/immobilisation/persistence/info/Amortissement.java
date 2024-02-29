@@ -24,12 +24,11 @@ public class Amortissement {
     double amortissementCumule;
 
     double valeurNetteComptable;
+    int anniversaire;
 
     public static void main(String[] args) {
         LocalDate d1 = LocalDate.parse("2010-01-01");
         LocalDate d2 = LocalDate.parse("2010-07-01");
-        System.out.println("1");
-        System.out.println("2");
         System.out.println(Amortissement.getDayBetween(d1, d2));
     }
     public static int getDayBetween(LocalDate date1, LocalDate date2){
@@ -46,7 +45,6 @@ public class Amortissement {
                 }
             }else {
                 date1 = date1.plusMonths(1).withDayOfMonth(1);
-            //    nombre += 1;
             }
         }
         return nombre;
@@ -55,17 +53,14 @@ public class Amortissement {
     public List<Amortissement> tableauAmortissementLineaire(){
         List<Amortissement> tableau = new ArrayList<>();
         dureeAmortissement = dureeAmortissement + 1;
-        int anniversaire = Amortissement.getDayBetween(LocalDate.MIN.withYear(this.dateFin.getYear()), this.dateFin);
-        int jourUtilisation = 0;
-        int annee = 0;
+        anniversaire = Amortissement.getDayBetween(LocalDate.MIN.withYear(this.dateFin.getYear()), this.dateFin);
+        int jourUtilisation, annee;
         int dureeInitiale = dureeAmortissement;
         double cumulAmortissement = 0;
         while (dureeAmortissement > 0){
             LocalDate dateFinExercice = LocalDate.MAX.withYear(this.dateFin.getYear());
-            jourUtilisation = (int) Math.abs(Amortissement.getDayBetween(this.dateFin, dateFinExercice));
+            jourUtilisation = Math.abs(Amortissement.getDayBetween(this.dateFin, dateFinExercice));
             if(dureeAmortissement == 1) jourUtilisation = anniversaire;
-            System.out.println("jour="+jourUtilisation);
-
             annee = (dureeInitiale - dureeAmortissement) + 1;
             Amortissement amortissement1 = ligneAmortissement(jourUtilisation, annee, cumulAmortissement, 360);
             cumulAmortissement = amortissement1.getAmortissementCumule();
@@ -74,8 +69,8 @@ public class Amortissement {
             dureeAmortissement --;
         }
         return tableau;
-    }
 
+    }
 
     public Amortissement ligneAmortissement(
             long jourUtilisation, int annee, double dernierAmortissement, int lengtYear
@@ -93,16 +88,14 @@ public class Amortissement {
     public List<Amortissement> tableauAmortissementDegressif(){
         List<Amortissement> tableau = new ArrayList<>();
         dureeAmortissement = dureeAmortissement + 1;
-        int anniversaire = Amortissement.getDayBetween(LocalDate.MIN.withYear(this.dateFin.getYear()), this.dateFin);
         int jourUtilisation = 0;
         int annee = 0;
         int dureeInitiale = dureeAmortissement;
         double cumulAmortissement = 0;
         while (dureeAmortissement > 0){
             LocalDate dateFinExercice = LocalDate.MAX.withYear(this.dateFin.getYear());
-            jourUtilisation = (int) Math.abs(Amortissement.getDayBetween(this.dateFin, dateFinExercice));
+            jourUtilisation = Math.abs(Amortissement.getDayBetween(this.dateFin, dateFinExercice));
             annee = (dureeInitiale - dureeAmortissement) ; // annee
-           // if(dureeAmortissement == 1) jourUtilisation = anniversaire;
             Amortissement amortissement1 = ligneAmortissementDegressif(jourUtilisation, annee, cumulAmortissement);
             cumulAmortissement = amortissement1.getAmortissementCumule();
             tableau.add(amortissement1);
@@ -120,7 +113,6 @@ public class Amortissement {
         double tauxDegressif = getTauxAmortissement() * getCoefficientDegressif();
         int dureeLineaire = (int) (1 / (tauxDegressif / 100));
         amortissement1.setTauxAmortissement(tauxDegressif);
-        System.out.println(amortissement1.getAnnee() +" &"+ dureeLineaire);
         if(amortissement1.getAnnee() <= dureeLineaire){
             amortissement1.setAnnuiteAmortissement(this.valeurBase  / amortissement1.getAnnee());
         }else if(amortissement1.getAnnee() > dureeLineaire){
@@ -129,18 +121,14 @@ public class Amortissement {
             } else {
                 amortissement1.setAnnuiteAmortissement(this.valeurBase * (tauxDegressif / (float) 100));
             }
-        }//else if(amortissement1.getAnnee() < dureeLineaire){
-        //    amortissement1.setAnnuiteAmortissement(this.valeurBase);
-        //}
+        }
         amortissement1.setAmortissementCumule(dernierAmortissement + amortissement1.getAnnuiteAmortissement());
         amortissement1.setValeurNetteComptable(this.valeurBase - amortissement1.getAnnuiteAmortissement());
-        // eto izy lasa 0
         this.setValeurBase(this.valeurBase - amortissement1.getAnnuiteAmortissement());
         return amortissement1;
     }
 
     double getCoefficientDegressif() {
-        // =SI(DUREE>6;2,5;SI(OU(DUREE=3;DUREE=4);1,5;2))
         if (this.dureeAmortissementInitiale == 3 || this.dureeAmortissementInitiale == 4) {
             return 1.5;
         } else if (this.dureeAmortissementInitiale == 6 || this.dureeAmortissementInitiale == 5) {

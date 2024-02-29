@@ -150,8 +150,6 @@ public class Immobilisation {
         amortissement1.setAnnuiteAmortissement(Double.valueOf(0));
         List<Amortissement> amortissements;
         if(type == 1){
-            //amortissement1.setDureeAmortissement(amortissement1.getDureeAmortissement() - 1);
-            //amortissement1.setDureeAmortissementInitiale(amortissement1.getDureeAmortissementInitiale() - 1);
             amortissements =  amortissement1.tableauAmortissementLineaire();
         }else{
             amortissements = amortissement1.tableauAmortissementDegressif();

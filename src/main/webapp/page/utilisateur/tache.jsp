@@ -17,7 +17,6 @@
     Connection c;
     List<Employe> employeList = new ArrayList<>();
     List<Rapport> rapports = new ArrayList<>();
-    double avancement = 0;
     String error = null;
     try{
         c = new Connexion().enterToBdd();
@@ -50,7 +49,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<jsp:include page="../Header.jsp" />
+    <jsp:include page="../Header.jsp" />
     <div class="container">
         <div class="row">
             <div class="col">
@@ -85,6 +84,7 @@
                                     <label for="date">Date de fin</label>
                                     <input type="datetime-local" class="form-control" id="date" name="date">
                                 </div>
+                                <input type="hidden" value="<%=r.getEmployeId()%>" name="idEmploye">
                                 <input type="hidden" value="<%=r.getId()%>" name="idRapport">
                                 <button type="submit" name="Repporter" class="btn btn-primary">Marquer comme terminé</button>
                             </form>

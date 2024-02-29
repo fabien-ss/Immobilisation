@@ -82,7 +82,7 @@
                             <h2>Tâches:</h2>
                             <ul>
                                 <% for (Utilisation u : rapport.getUtilisations()) { %>
-                                <li><%=Tache.getTacheById(c, u.getTacheId()).getDescription()%></li>
+                                    <li><%=Tache.getTacheById(c, u.getTacheId()).getDescription()%></li>
                                 <% } %>
                             </ul>
                         </section>

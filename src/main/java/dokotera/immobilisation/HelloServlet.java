@@ -1,6 +1,8 @@
 package dokotera.immobilisation;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -21,6 +23,8 @@ public class HelloServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
+        Vector<Object> objects = new Vector<>();
+        ArrayList<Object> objects1 = new ArrayList<>();
     }
 
     public void destroy() {

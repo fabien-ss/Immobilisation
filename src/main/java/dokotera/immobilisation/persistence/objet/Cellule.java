@@ -7,7 +7,6 @@ public class Cellule {
     String start;
     String end;
     String backgroundColor;
-
     Employe employe;
 
     public void setEmploye(Employe employe) {

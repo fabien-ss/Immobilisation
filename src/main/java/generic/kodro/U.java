@@ -49,12 +49,12 @@ public class U {
         return values + ")";
     }
 
-    public static String getTableName(Object o) throws Exception{
+    public static String getTableName(Object o) {
         try{
             return o.getClass().getAnnotation(C.class).t();
         }
         catch(Exception e){
-            throw new Exception("DAO - Pas de correspondance de table "+e.getMessage());
+            return o.getClass().getName();
         }
     }
 
@@ -80,7 +80,6 @@ public class U {
                         m.invoke(ob, findForeignObject(object, resultSet.getObject(name), co));
                     }
                     else {
-                        System.out.println(name);
                         try {
                             m.invoke(ob, resultSet.getObject(name));
                         }catch (Exception e){
@@ -90,7 +89,6 @@ public class U {
                             }catch (Exception es){}
                         }
                     }
-                    System.out.println(resultSet.getObject(i));
                     i += 1;
                 }
             }
@@ -179,7 +177,6 @@ public class U {
                 C c = f.getDeclaredAnnotation(C.class);
                 f.setAccessible(true);
                 if(c.pk() & f.get(o) == null){
-                    System.out.println("sequence is "+sequence);
                     if(f.getType() != String.class){
                         f.set(o, Integer.valueOf(sequence));
                     }else{
@@ -190,7 +187,6 @@ public class U {
                 f.setAccessible(false);
             }
         }
-       // throw new Exception("DAO - You didn't specify primary key");
     }
 
     private static String mameno(int numero, int reste) {

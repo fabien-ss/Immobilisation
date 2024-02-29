@@ -49,21 +49,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="./assets/fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-
-    <!-- Style -->
     <link rel="stylesheet" href="./assets/css/style.css">
-
     <title>Table #6</title>
 </head>
 <body>
-
 
 <div class="content">
 
@@ -78,7 +70,7 @@
                             <option value=<%=i.getId()%>><%=i.getDescription()%></option>
                             <% } %>
                         </select>
-                        <label>Nombre d'année</label>
+                        <label>Nombre d'annjée</label>
                         <input type="number" class="form-control" name="annee">
                         <label>Type</label>
                         <select name="precision" class="form-select">

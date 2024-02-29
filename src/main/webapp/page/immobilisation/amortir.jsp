@@ -10,15 +10,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="generic.base.Connexion" %>
 <%@ page import="generic.kodro.A" %>
-<%@ page import="dokotera.immobilisation.persistence.objet.Callendrier" %>
-<%@ page import="dokotera.immobilisation.persistence.info.Utilisation" %>
-<%@ page import="dokotera.immobilisation.persistence.info.Amortissement" %><%--
-  Created by IntelliJ IDEA.
-  User: fabien
-  Date: 2/13/24
-  Time: 11:06 AM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="dokotera.immobilisation.persistence.info.Amortissement" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Connection c;

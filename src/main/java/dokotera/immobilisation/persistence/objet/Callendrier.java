@@ -76,19 +76,7 @@ public class Callendrier {
         else if(this.heure > 7) return "red";
         return "green";
     }
-/*
-    public LocalDate getTargetDate(){
-        int weekNumber = Integer.valueOf(jour);
-        // premier jour du mois
-        LocalDate firstDayOfMonth = LocalDate.of(annee, mois,  1);
 
-        // Adjust to the first day of the given week number
-        LocalDate firstDayOfWeek = firstDayOfMonth.
-                with(TemporalAdjusters.firstInMonth(WeekFields.of(Locale.getDefault()).weekOfMonth(), weekNumber));
-        // Now find the specific day of the week within that week
-        LocalDate targetDay = firstDayOfWeek.plusDays(6); // Assuming Sunday is the last day of the week
-
-    }*/
     public String getJsonList(Connection c) throws Exception {
         Gson gson = new Gson();
         String json = gson.toJson(this.getStructuredListData(c));
